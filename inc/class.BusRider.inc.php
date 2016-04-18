@@ -159,7 +159,7 @@ class BusRider
         $this->send_update_address_msg();
         break;
       case "LST":
-        $this->send_rsvp_choices_msg();
+        $this->send_rsvp_list_msg();
         break;
       case "END":
         $this->send_end_session_msg();
@@ -1291,7 +1291,6 @@ class BusRider
             . "NO - Try again\n"
             . "Text one of the above commands";
             
-          $this->session_update_now(DISPATCH_RSVP_CONFIRM);
           $this->session_update_now(DISPATCH_RSVP_CONFIRM);
           $this->send_sms_msg($msg);
         }
