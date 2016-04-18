@@ -52,8 +52,6 @@ class BusRider
 
   public function get_sms_number() { return $this->_sms_number; }
   public function get_sms_message() { return $this->_sms_message; }
-  
-  public function set_error($error) { $this->_error = $error; }
 
   public function set_rider_id($rider_id) { $this->_rider_id = $rider_id; }
   public function set_phone_number($phone_number) { $this->_phone_number = $phone_number; }
@@ -73,6 +71,8 @@ class BusRider
   public function set_ses_datetime($ses_datetime) { $this->_ses_datetime = $ses_datetime; }
   public function set_ses_expiration($ses_expiration) { $this->_ses_expiration = $ses_expiration; }
   public function set_ses_status($status) { $this->_ses_status = $status; }
+  
+  public function set_error($error) { $this->_error = $error; }
   
   public function set_sms_number($sms_number) { $this->_sms_number = $sms_number; }
   public function set_sms_message($sms_message) 
@@ -378,6 +378,44 @@ class BusRider
     return $pass;
   }
 
+  public function is_beta_tester($phone_number)
+  { 
+    try 
+    { 
+      $time = new Timestamp();
+   
+      $sql =
+        "SELECT * FROM bus_riders_reg  "
+          . "WHERE phone_number = :phone_number ";
+
+      $pdo = get_pdo_connection();
+      if ($statement = $pdo->prepare($sql))
+      {
+        $statement->bindValue(":blocked_number", $phone_number, PDO::PARAM_STR);
+        $statement->execute();
+
+        if ($row_set = $statement->fetch(PDO::FETCH_BOTH)) 
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else 
+      {
+        throw new Exception("Could not create prepared statement.");
+      }
+    } 
+    catch (Exception $e) 
+    {
+      $this->set_error("is_blocked::" . $e->getMessage());
+      $this->log_error();
+      return false;
+    }
+  }
+
   public function is_blocked($phone_number)
   { 
     try 
@@ -386,12 +424,12 @@ class BusRider
    
       $sql =
         "SELECT * FROM blocked_numbers  "
-          . "WHERE blocked_number = :blocked_number ";
+          . "WHERE blocked_number = :phone_number ";
 
       $pdo = get_pdo_connection();
       if ($statement = $pdo->prepare($sql))
       {
-        $statement->bindValue(":blocked_number", $phone_number, PDO::PARAM_STR);
+        $statement->bindValue(":phone_number", $phone_number, PDO::PARAM_STR);
         $statement->execute();
 
         if ($row_set = $statement->fetch(PDO::FETCH_BOTH)) 
@@ -926,6 +964,15 @@ class BusRider
     }
   }
 
+  public function send_beta_tester_message()
+  {
+    $msg = "You have been determined to be a beta tester. "
+      . "You have been preregistered with fake data. "
+      . "Simply text -REGISTER_ME- to register your phone."      ;
+    $this->set_ses_status(DISPATCH_REGISTRATION);
+    $this->send_sms_msg($msg);
+  }
+
   public function send_blocked_message()
   {
     $msg = "Regrettably, your number has been "
@@ -935,7 +982,7 @@ class BusRider
     $this->set_ses_status(DISPATCH_REGISTRATION);
     $this->send_sms_msg($msg);
   }
-  
+
   public function send_cleanup_msg()
   {
     try 
@@ -1016,7 +1063,7 @@ class BusRider
       $this->log_error();
     }
   }    
-  
+
   public function send_end_session_msg()
   {
     $msg = "You have chosen to end your "
@@ -1036,7 +1083,7 @@ class BusRider
 
     $this->send_sms_msg($msg);
   }
-  
+
   public function send_list_choices_msg()
   {
     try 
@@ -1221,6 +1268,11 @@ class BusRider
       . "a ride for upcoming Rock Church services.";
       
     $this->send_sms_msg($msg);
+    
+    if($this->is_beta_tester($this->get_sms_number()))
+    {
+      $this->send_beta_tester_message();
+    }
   }
 
   public function send_rsvp_choices_msg()
@@ -1373,7 +1425,7 @@ class BusRider
 
         $this->session_update_now(DISPATCH_CONVERSATION);
         $this->send_sms_msg($msg);
-        $this->$this->send_new_session_msg();
+        $this->send_new_session_msg();
       }
       else
       {
@@ -1649,10 +1701,6 @@ class BusRider
         . "WHERE r.rider_id = :rider_id "
         . "AND s.svs_datetime > :ses_datetime "
         . "ORDER BY s.svs_datetime";
-
-$this->log_debug($sql);
-$this->log_debug("get_rider_id: " . $this->get_rider_id());        
-$this->log_debug("get_ses_datetime: " . $this->get_ses_datetime());        
       
       if ($statement = $pdo->prepare($sql))
       {
@@ -1677,8 +1725,6 @@ $this->log_debug("get_ses_datetime: " . $this->get_ses_datetime());
 
             $identifier++;
           }
-          if($identifier == ord("A"))
-            echo "No rides found."  . "<br>\n";
         }
         else 
         {
