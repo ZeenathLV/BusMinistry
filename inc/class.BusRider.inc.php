@@ -169,7 +169,7 @@ class BusRider
         $this->send_end_session_msg();
         break;
       default:
-        $this->log_debug("Invalid Response: " . $cmd . " Procedure130"); 
+        $this->log_debug("Invalid Response: " . $cmd . " Procedure 130"); 
         $this->send_invalid_msg();
         $this->send_new_session_msg();
         break;
