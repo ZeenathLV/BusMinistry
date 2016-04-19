@@ -110,7 +110,9 @@ class BusRider
     }
     else
     {
-      $this->send_invalid_msg(120);
+      $this->log_debug("Invalid Response: " . $command . " Procedure 110"); 
+
+      $this->send_invalid_msg();
       $msg = "If you would like a bus reservation "
         . "please text -RIDE-.\n"
         . "You entered " . $command;
@@ -143,14 +145,16 @@ class BusRider
     }
     else
     {
-      $this->send_invalid_msg(130);
+      $this->log_debug("Invalid Response: " . $identifier . " Procedure 120"); 
+      $this->send_invalid_msg();
       $this->send_list_choices_msg();
     }
   }
   
   public function dispatch_new_session() 
   { 
-    switch($this->get_sms_message())
+    $cmd = $this->get_sms_message();
+    switch($cmd)
     {
       case "NEW":
         $this->send_list_choices_msg();
@@ -165,7 +169,8 @@ class BusRider
         $this->send_end_session_msg();
         break;
       default:
-        $this->send_invalid_msg(140);
+        $this->log_debug("Invalid Response: " . $cmd . " Procedure130"); 
+        $this->send_invalid_msg();
         $this->send_new_session_msg();
         break;
     }
@@ -188,7 +193,8 @@ class BusRider
     }
     else
     {
-      $this->send_invalid_msg(110);
+      $this->log_debug("Invalid Response: " . $confirm . " Procedure 140"); 
+      $this->send_invalid_msg();
       $this->send_pax_confirm_msg();
     }
   }
@@ -208,6 +214,7 @@ class BusRider
     }
     else
     {
+      $this->log_debug("Invalid Response: " . $pax_count . " Procedure 150"); 
       $this->send_invalid_msg(150);
       $this->send_pax_count_msg();
     }
@@ -249,7 +256,8 @@ class BusRider
     }
     else
     {
-      $this->send_invalid_msg(130);
+      $this->log_debug("Invalid Response: " . $identifier . " Procedure 160"); 
+      $this->send_invalid_msg();
       $this->send_rsvp_choices_msg();
     }
   }
@@ -271,14 +279,16 @@ class BusRider
    }
     else
     {
-      $this->send_invalid_msg(110);
+      $this->log_debug("Invalid Response: " . $confirm . " Procedure 170"); 
+      $this->send_invalid_msg();
       $this->send_rsvp_confirm_msg();
     }
   }
   
   public function dispatch_rsvp_list()
   { 
-    switch($this->get_sms_message())
+    $cmd = $this->get_sms_message();
+    switch($cmd)
     {
       case "NEW":
         $this->send_list_choices_msg();
@@ -290,7 +300,8 @@ class BusRider
         $this->send_new_session_msg();
         break;
       default:
-        $this->send_invalid_msg(160);
+        $this->log_debug("Invalid Response: " . $cmd . " Procedure 180"); 
+        $this->send_invalid_msg();
         $this->send_rsvp_list_msg();
         break;
     }
@@ -1075,11 +1086,10 @@ class BusRider
     $this->send_sms_msg($msg);
   }
 
-  public function send_invalid_msg($procedure)
+  public function send_invalid_msg()
   {
     $msg = "It appears you have entered "
-      . "an incorrect response.\n" 
-      . "Procedure: " . $procedure;
+      . "an incorrect response.\n";
 
     $this->send_sms_msg($msg);
   }
