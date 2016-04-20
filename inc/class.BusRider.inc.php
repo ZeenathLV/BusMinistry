@@ -27,7 +27,7 @@ class BusRider
   private $_ses_status = "";
   private $_error = "";
   
-  function __construct() {}
+  function __construct($twilio_enabled = true) { $this->_twilio_enabled = $twilio_enabled;}
   
   public function get_rider_id() { return $this->_rider_id; }
   public function get_phone_number() { return $this->_phone_number; }
@@ -1272,11 +1272,12 @@ class BusRider
   {
     $msg = "Welcome to The Rock Bus Ministry\n"
       . "It appears you have not registered with us. "
-      . "Click on this link: bit.lo/aTky to register. "
-      . "When you have completed the registration, "
+      . "Click on this link: " . ROOT_PATH 
+      . "account_new.php?phone_number=" . $this->get_sms_number()
+      . "\n\nWhen you have completed the registration, "
       . "text -RIDE- and you will be able to select "
       . "a ride for upcoming Rock Church services.";
-      
+
     $this->send_sms_msg($msg);
     
     if($this->is_beta_tester($this->get_sms_number()))
@@ -1556,8 +1557,8 @@ class BusRider
         $statement->execute();
 
         $msg = "Click on this link  to update your address:\n"
-          . "bit.lo?access=" . $update_pwd
-          . "\nThis link will be valid for only one hour.\n"
+          . ROOT_PATH . "account_update.php?access=" . $update_pwd
+          . "\n\nThis link will be valid for only one hour.\n"
           . "When you have completed the registration, "
           . "text -RIDE- and you will be able to select "
           . "a ride for upcoming Rock Church services.";
