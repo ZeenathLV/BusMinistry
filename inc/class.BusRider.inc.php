@@ -1,6 +1,5 @@
 <?php
 include_once("constants.php");
-include_once(ROOT_DIR . "twilio-php-master/Services/Twilio.php");
       
 class BusRider
 {
@@ -29,6 +28,8 @@ class BusRider
   
   function __construct($twilio_enabled = true) { $this->_twilio_enabled = $twilio_enabled;}
   
+  public function get_twillio_flag() { return $this->_twilio_enabled; }
+
   public function get_rider_id() { return $this->_rider_id; }
   public function get_phone_number() { return $this->_phone_number; }
   public function get_name_last() { return $this->_name_last; }
@@ -402,7 +403,7 @@ class BusRider
       $pdo = get_pdo_connection();
       if ($statement = $pdo->prepare($sql))
       {
-        $statement->bindValue(":blocked_number", $phone_number, PDO::PARAM_STR);
+        $statement->bindValue(":phone_number", $phone_number, PDO::PARAM_STR);
         $statement->execute();
 
         if ($row_set = $statement->fetch(PDO::FETCH_BOTH)) 
@@ -1515,17 +1516,13 @@ class BusRider
   {
     if($this->_twilio_enabled)
     {
-      $client = new Services_Twilio(TWILIO_SID, TWILIO_TOKEN);
-
       try 
       {
-        $message = $client->account->messages->create(array(
-            "From" => TWILIO_NUMBER,
-            "To" => $this->_phone_number,
-            "Body" => $message
-        ));
+        echo "The twilio_enabled flag is not working" . EEOL;
+        //sms_funct_send_message($this->get_sms_number(), $message);
+        throw new Exception("The twilio_enabled flag is not working");
       } 
-      catch (Services_Twilio_RestException $e) 
+      catch (Exception $e) 
       {
         $this->set_error("send_sms_msg::" . $e->getMessage());
         $this->log_error();

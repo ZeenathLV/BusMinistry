@@ -1,11 +1,5 @@
 <?php
 include_once("constants.php");
-
-// $str = <<<SQL
-// Example of string
-// spanning multiple lines
-// using heredoc syntax.
-// SQL;  // This label must be in the first column
      
 class Calendar
 {
