@@ -1,6 +1,6 @@
 <?php
 include_once("constants.php");
-include_once(ROOT_DIR . "inc/database_tables.php");
+require_once(ROOT_DIR . "inc/database_tables.php");
 
 if ($_REQUEST)
 {
@@ -126,7 +126,69 @@ if ($_REQUEST)
       border-right: none !important;
   }
   </style>
-  <script>
+  <script type="text/javascript">
+  function myFunction() 
+  {
+    var table_names = [
+      "bus_riders",
+      "bus_riders_reg",
+      "bus_riders_reg_insert",
+      "bus_rides",
+      "default_services",
+      "default_services_insert",
+      "services",
+      "sessions",
+      "session_choices",
+      "session_log",
+      "unregistered_log",
+      "session_choices_v",
+      "session_log_v",
+      "blocked_numbers" ];
+
+    var chkbx_main = document.getElementById("select_all").checked;
+    for (var i = 0; i < table_names.length; i++ )
+    {
+     document.getElementById(table_names[i]).checked = chkbx_main;     
+    } 
+
+    //alert("Is this thing working?");
+  }
+  function select_all()
+  {
+    var table_names = [
+      "bus_riders",
+      "bus_riders_reg",
+      "bus_riders_reg_insert",
+      "bus_rides",
+      "default_services",
+      "default_services_insert",
+      "services",
+      "sessions",
+      "session_choices",
+      "session_log",
+      "unregistered_log",
+      "session_choices_v",
+      "session_log_v",
+      "blocked_numbers" ];
+
+    alert("Is this thing working?");
+     
+    // var chkbx_main = document.getElementById("select_all").checked;
+
+    // if(chkbx_main)
+    // {
+    //   alert("the box is checked");
+    // }
+    // else
+    // {
+    //   alert("the box is not checked");
+    // }
+
+    //for (var i = 0; i < table_names.length; i++ )
+    //{
+    //  document.getElementById(table_names[i]).checked = chkbx_main;     
+    //} 
+  }
   </script>
 </head>
 <body>
@@ -139,7 +201,12 @@ if ($_REQUEST)
 <table class="scroll">
     <thead>
         <tr>
-            <th>Table Name</th>
+            <th align="LEFT">
+              <label>
+                <input id='select_all' name='select_all' type='checkbox' onclick="myFunction()" />
+                &nbsp;&nbsp;Table Name
+              </label>
+            </th>
             <th>Description</th>
             <th>Remarks</th>
         </tr>
@@ -155,7 +222,10 @@ for($i = 0;$i < $max;$i++)
   echo $baseline . "<tr>\n";
   echo $baseline . "  <td>\n";
   echo $baseline . "    <label><input name='" . $table_name 
-      . "' type='checkbox' >" . db_func_get_table_long_name($i) . "</label>\n";
+      . "' id='" . $table_name 
+      . "' type='checkbox' >" 
+      . db_func_get_table_long_name($i) 
+      . "</label>\n";
   echo $baseline . "  </td>\n";
   echo $baseline . "  <td>\n";
   echo $baseline . "    " . db_func_get_table_description($i) . "\n";
