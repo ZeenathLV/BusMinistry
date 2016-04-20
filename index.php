@@ -156,7 +156,7 @@ else
 {
   try
   {
-    $rider = new BusRider();
+    $rider = new BusRider(false);
     
     $rider->load_rider($phone, $message);
     

@@ -1,8 +1,7 @@
 <?php
 try
 {
-  $twillio_enabled = true;
-  $rider = new BusRider($twillio_enabled);
+  $rider = new BusRider(true);
   
   $rider->load_rider($phone, $message);
   

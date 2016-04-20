@@ -1,40 +1,15 @@
 <?php
 include_once("constants.php");
-include_once(ROOT_DIR . "inc/database_tables.php");
 
-echo "ROOT_DIR: " . ROOT_DIR . EEOL;
-echo "ROOT_PATH: " . ROOT_PATH . EEOL;
+$rider = new BusRider();
+echo "No Parameter: " . ($rider->get_twillio_flag() ? "TRUE" : "FALSE") . EEOL;
+$rider = new BusRider(false);
+echo "False Parameter: " . ($rider->get_twillio_flag() ? "TRUE" : "FALSE") . EEOL;
+$rider = new BusRider(true);
+echo "True Parameter: " . ($rider->get_twillio_flag() ? "TRUE" : "FALSE") . EEOL;
 
-try 
-{
-  echo "ROOT_DIR: " . ROOT_DIR . EEOL;  
-  echo "DB_USER: " . DB_USER . EEOL;  
-  echo "DB_PASS: " . DB_PASS . EEOL;  
-  echo "DB_SERVER: " . DB_SERVER . EEOL;  
-  echo "DB_NAME: " . DB_NAME . EEOL;  
 
-  $dsn = "mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME;
-  $pdo = new PDO($dsn, DB_USER, DB_PASS);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $sql = "SELECT * FROM `albums`";
-  if ($statement = $pdo->prepare($sql))
-  {
-    $statement->execute();
-    while ($row_set = $statement->fetch(PDO::FETCH_BOTH)) 
-    {
-      echo $row_set['NAME'] . EEOL;
-    }
-  }
-  else
-  {
-    throw new Exception("Could not create prepared statement.");
-  }
-} 
-catch (Exception $e) 
-{
-  echo "Error: " . $e->getMessage();  
-}
 
 
 // $ndx = 1;
@@ -78,6 +53,11 @@ catch (Exception $e)
 // }
 // echo "final table_remarks: " . db_func_get_table_remarks($ndx) . EEOL;
 
+
+/*
+
+/homepages/16/d207522547/htdocs/bolden1/rcwoc/twilio-php-master/Services/Twilio.php
+*/
 
 ?>
 
