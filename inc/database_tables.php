@@ -71,6 +71,21 @@ function db_func_set_table_remarks($ndx, $remarks)
   $table_data[$tablename][REMARKS] = $remarks;
 }
 
+$sql_blocked_numbers = <<<SQL
+CREATE TABLE `blocked_numbers` (
+  `blocked_id` int(11) NOT NULL auto_increment,
+  `blocked_number` varchar(15) NOT NULL,
+  `reason` varchar(250) NOT NULL,
+  PRIMARY KEY  (`blocked_id`),
+  KEY `blocked_number` (`blocked_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+SQL;
+
+$sql_blocked_numbers_insert = <<<SQL
+INSERT INTO `blocked_numbers` (`blocked_id`, `blocked_number`, `reason`) VALUES
+(1, '9512081896', 'This is a test');
+SQL;
+
 $sql_bus_riders = <<<SQL
 CREATE TABLE `bus_riders` (
   `rider_id` int(11) NOT NULL auto_increment,
@@ -219,7 +234,7 @@ CREATE TABLE `unregistered_log` (
 SQL;
 
 $sql_session_choices_v = <<<SQL
-CREATE VIEW `bus-riders`.`session_choices_v` AS 
+CREATE VIEW `session_choices_v` AS 
 select 
   `b`.`rider_id` AS `rider_id`,
   `v`.`svs_id` AS `svs_id`,
@@ -230,17 +245,17 @@ select
   `v`.`svs_datetime` AS `svs_datetime`,
   `c`.`identifier` AS `identifier` 
 from 
-  (((`bus-riders`.`session_choices` `c` 
-    join `bus-riders`.`services` `v` 
+  (((`session_choices` `c` 
+    join `services` `v` 
       on((`v`.`svs_id` = `c`.`svs_id`))) 
-    join `bus-riders`.`sessions` `s` 
+    join `sessions` `s` 
       on((`c`.`ses_id` = `s`.`ses_id`))) 
-    join `bus-riders`.`bus_riders` `b` 
+    join `bus_riders` `b` 
       on((`b`.`rider_id` = `s`.`rider_id`)))
 SQL;
 
 $sql_session_log_v = <<<SQL
-CREATE VIEW `bus-riders`.`session_log_v` AS 
+CREATE VIEW `session_log_v` AS 
 SELECT 
   `b`.`phone_number` AS `phone_number`,
   `l`.`ses_log_id` AS `ses_log_id`,
@@ -252,36 +267,28 @@ SELECT
   `s`.`rider_id` AS `rider_id`,
   `l`.`ses_text` AS `ses_text` 
 FROM
-  ((`bus-riders`.`session_log` `l` 
-    join `bus-riders`.`sessions` `s` 
+  ((`session_log` `l` 
+    join `sessions` `s` 
 	  on((`l`.`ses_id` = `s`.`ses_id`))) 
-	join `bus-riders`.`bus_riders` `b` 
+	join `bus_riders` `b` 
 	  on((`s`.`rider_id` = `b`.`rider_id`)))
 UNION 
 SELECT 
-  `bus-riders`.`unregistered_log`.`unr_phone_number` AS `phone_number`,
+  `unregistered_log`.`unr_phone_number` AS `phone_number`,
   -(1) AS `ses_log_id`,
   -(2) AS `ses_id`,
-  `bus-riders`.`unregistered_log`.`unr_datetime` AS `ses_datetime`,
-  `bus-riders`.`unregistered_log`.`unr_sender` AS `ses_sender`,
-  if((`bus-riders`.`unregistered_log`.`unr_sender` = _latin1'S'),1,2) AS `ses_sender_ord`,
-  `bus-riders`.`unregistered_log`.`unr_expiration` AS `ses_expiration`,
-  -(3) AS `rider_id`,`bus-riders`.`unregistered_log`.
-  `unr_text` AS `ses_text` from `bus-riders`.`unregistered_log` 
+  `unregistered_log`.`unr_datetime` AS `ses_datetime`,
+  `unregistered_log`.`unr_sender` AS `ses_sender`,
+  if((`unregistered_log`.`unr_sender` = _latin1'S'),1,2) AS `ses_sender_ord`,
+  `unregistered_log`.`unr_expiration` AS `ses_expiration`,
+  -(3) AS `rider_id`,`unregistered_log`.
+  `unr_text` AS `ses_text` from `unregistered_log` 
 ORDER BY 1,3,6;
 SQL;
 
-$sql_blocked_numbers = <<<SQL
-CREATE TABLE `blocked_numbers` (
-  `blocked_id` int(11) NOT NULL auto_increment,
-  `blocked_number` varchar(15) NOT NULL,
-  `reason` varchar(250) NOT NULL,
-  PRIMARY KEY  (`blocked_id`),
-  KEY `blocked_number` (`blocked_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-SQL;
-
 $table_names = array(
+  "blocked_numbers",  
+  "blocked_numbers_insert",  
   "bus_riders",
   "bus_riders_reg",
   "bus_riders_reg_insert",
@@ -294,11 +301,20 @@ $table_names = array(
   "session_log",
   "unregistered_log",
   "session_choices_v",
-  "session_log_v",
-  "blocked_numbers"  
+  "session_log_v"
 );
 
 $table_data = array(
+  "blocked_numbers"         =>  array(
+                                        NAME_LONG => "Blocked Numbers",      
+                                        QUERY => $sql_blocked_numbers,
+                                        DESCRIPTION => "Table of blocked numbers",
+                                        REMARKS => "N/A" ),      
+  "blocked_numbers_insert"  =>  array(
+                                        NAME_LONG => "Blocked Numbers Data",      
+                                        QUERY => $sql_blocked_numbers_insert,
+                                        DESCRIPTION => "Data for table of blocked numbers",
+                                        REMARKS => "N/A" ),      
   "bus_riders"              =>  array(
                                         NAME_LONG => "Bus Riders",
                                         QUERY => $sql_bus_riders,
@@ -363,11 +379,6 @@ $table_data = array(
                                         NAME_LONG => "Session Log View",      
                                         QUERY => $sql_session_log_v,
                                         DESCRIPTION => "View of log per session",
-                                        REMARKS => "N/A" ),      
-  "blocked_numbers"           =>  array(
-                                        NAME_LONG => "Blocked Numbers",      
-                                        QUERY => $sql_blocked_numbers,
-                                        DESCRIPTION => "Table of blocked numbers",
                                         REMARKS => "N/A" )      
 );
 
