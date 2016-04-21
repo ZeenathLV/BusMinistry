@@ -79,6 +79,8 @@ class BusRider
   { 
     if(startsWith($sms_number,"+1"))
       $this->_sms_number = substr($sms_number,2,10);
+    else if(startsWith($sms_number,"1"))
+      $this->_sms_number = substr($sms_number,1,10);
     else
       $this->_sms_number = $sms_number;
   }
@@ -572,7 +574,7 @@ class BusRider
       $this->set_ses_datetime($time->get_datetime());
       $this->set_ses_expiration($time->get_session_expiration());
       $this->set_ses_status(DISPATCH_REGISTRATION);
-      
+
       // Check for special commands to play with the database
       switch ($this->get_sms_message()) 
       {
@@ -584,24 +586,29 @@ class BusRider
           break;
       }
       
-      if($this->is_blocked($sms_number))
+      // Check for blocked number
+      if($this->is_blocked($this->get_sms_number()))
       {
         $this->set_ses_status(DISPATCH_BLOCKED);
         return;
       }
       
-      $this->load($sms_number);
+      // Load from database
+      $this->load($this->get_sms_number());
       if($this->has_error())
         throw new Exception($this->get_error());
       
+      // Check for not registered
       if($this->get_rider_id() == NEW_ID)
       {
         $this->set_ses_status(DISPATCH_REGISTRATION);
         return;
       }
       
+      // Load the session information
       $this->session_load_now();
       
+      // Log the message received
       $this->log_message(SENDER, $sms_message);
     } 
     catch (Exception $e) 
@@ -995,7 +1002,7 @@ class BusRider
   {
     $msg = "Regrettably, your number has been "
       . "blocked by the Bus Ministry App. "
-      . "Call " . format_phone(substr(TWILIO_NUMBER,2,10))
+      . "Call " . format_phone(TWILIO_NUMBER)
       . " and leave a message to change this status.";
     $this->set_ses_status(DISPATCH_REGISTRATION);
     $this->send_sms_msg($msg);
@@ -1048,7 +1055,7 @@ class BusRider
         $statement->execute();
 
         $msg = "Rock Church Bus Ministry\n"
-          . "Your reservation:\n"
+          . "Your reservation has been CONFIRMED:\n"
           . $time->format_timestamp($svs_datetime). "\n"
           . $row_set['pax_count'] . " passenger(s)\n\n"
           . "Please be ready 1 hour prior. Thank you.\n"
@@ -1275,12 +1282,17 @@ class BusRider
       $this->log_error();
     }   
   }
+
   public function send_registration_msg()
   {
+    if($this->get_twillio_flag())
+      $link = ROOT_PATH . "account_update.php?access=" . $update_pwd;
+    else
+      $link = "**some_link**";
+
     $msg = "Welcome to The Rock Bus Ministry\n"
       . "It appears you have not registered with us. "
-      . "Click on this link: " . ROOT_PATH 
-      . "account_new.php?phone=" . $this->get_sms_number()
+      . "Click on this link: " . $link
       . "\n\nWhen you have completed the registration, "
       . "text -RIDE- and you will be able to select "
       . "a ride for upcoming Rock Church services.";
@@ -1557,8 +1569,13 @@ class BusRider
         $statement->bindValue(":rider_id", $this->get_rider_id(), PDO::PARAM_INT);
         $statement->execute();
 
+        if($this->get_twillio_flag())
+          $link = ROOT_PATH . "account_update.php?access=" . $update_pwd;
+        else
+          $link = "**some_link**";
+
         $msg = "Click on this link  to update your address:\n"
-          . ROOT_PATH . "account_update.php?access=" . $update_pwd
+          . $link
           . "\n\nThis link will be valid for only one hour.\n"
           . "When you have completed the registration, "
           . "text -RIDE- and you will be able to select "
@@ -1841,7 +1858,6 @@ class BusRider
       $this->log_error();
     }
   }
-
 }
 
 ?>
