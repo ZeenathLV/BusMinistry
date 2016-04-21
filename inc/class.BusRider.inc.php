@@ -1518,9 +1518,7 @@ class BusRider
     {
       try 
       {
-        echo "The twilio_enabled flag is not working" . EEOL;
-        //sms_funct_send_message($this->get_sms_number(), $message);
-        throw new Exception("The twilio_enabled flag is not working");
+        sms_funct_send_message($this->get_sms_number(), $message);
       } 
       catch (Exception $e) 
       {
