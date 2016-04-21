@@ -1,0 +1,606 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"has",
+				"has_error"
+			],
+			[
+				"th",
+				"this"
+			],
+			[
+				"phone",
+				"phone_number"
+			],
+			[
+				"check",
+				"checkbox"
+			],
+			[
+				"get_s",
+				"get_sms_number"
+			],
+			[
+				"table_",
+				"table_name"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "sms_harness.php",
+			"settings":
+			{
+				"buffer_size": 1712,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "database.php",
+			"settings":
+			{
+				"buffer_size": 4229,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "inc/class.BusRider.inc.php",
+			"settings":
+			{
+				"buffer_size": 54676,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "account_new.php",
+			"settings":
+			{
+				"buffer_size": 5620,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "account_update.php",
+			"settings":
+			{
+				"buffer_size": 6610,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 4828,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "process_message.php",
+			"settings":
+			{
+				"buffer_size": 508,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "constants.php",
+			"settings":
+			{
+				"buffer_size": 5701,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 58.0,
+		"last_filter": "Snippet: try",
+		"selected_items":
+		[
+			[
+				"Snippet: try",
+				"Snippet: Wrap in try { … } catch (…) { … }"
+			],
+			[
+				"Snippet: ",
+				"Snippet: switch …"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 207.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/W/rock_church/nate/inc",
+		"/W/rock_church/nate"
+	],
+	"file_history":
+	[
+		"/C/Users/Dad/SkyDrive/Documents/Rock Church/Website/rock_church_ride.txt",
+		"/C/Users/Dad/AppData/Local/Temp/fz3temp-1/process_message.php",
+		"/W/rock_church/nate/inc/database_tables.php",
+		"/C/Users/Dad/SkyDrive/Documents/www/sitemanager.xml",
+		"/W/rock_church/nate/archive/original/twilio_send_message.php",
+		"/W/rock_church/nate/inc/class.Timestamp.inc.php",
+		"/W/rock_church/nate/inc/class.Calendar.inc.php",
+		"/W/rock_church/nate/archive/original/send-text.php",
+		"/W/rock_church/nate/twilio-php-master/Services/Twilio.php",
+		"/W/rock_church/nate/account_new.php",
+		"/W/bolden1/bolden1/variables.php",
+		"/C/Users/Dad/AppData/Local/Temp/fz3temp-1/test-create-account.php",
+		"/C/Program Files (x86)/FileZilla FTP Client/docs/fzdefaults.xml.example",
+		"/W/rock_church/nate/database.php",
+		"/C/Users/Dad/AppData/Local/Temp/fz3temp-1/bus_rider_table.php",
+		"/C/Program Files (x86)/FileZilla FTP Client/resources/defaultfilters.xml",
+		"/C/Program Files (x86)/FileZilla FTP Client/GPL.html",
+		"/C/Program Files (x86)/FileZilla FTP Client/AUTHORS",
+		"/C/wamp/www/rock_church/sms_harness.php",
+		"/C/Users/Dad/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/W/rock_church/nate/process_message.php",
+		"/C/Users/Dad/SkyDrive/Documents/Rock Church/Website/rock_church/nate/constants.php",
+		"/C/Users/Dad/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/W/rock_church/nate/inc/class.BusRider.inc.php",
+		"/W/rock_church/nate/constants.php"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"W:\\rock_church\\nate",
+			"C:\\",
+			"C:\\Users\\Dad",
+			"C:\\Program Files (x86)\\FileZilla FTP Client"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"$actual_link",
+			"Actual Link",
+			"function load_r",
+			"You sent this phone",
+			"set_phone_number",
+			"get_phone_number",
+			"phone_number",
+			"sms_number",
+			"function load_r",
+			"DISPATCH_REGISTRATION",
+			"function load_ri",
+			"+1",
+			"number",
+			"substr",
+			"send_sms_message",
+			"set_phone_number",
+			"function send_reg",
+			"216.70.106.246",
+			"myFunction",
+			"`bus-riders`.",
+			"twillio_enabled",
+			"function send_sm",
+			"function",
+			"tablename",
+			"216.70.106.246",
+			"\" Procedure "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "sms_harness.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1712,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1712,
+								1712
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 659.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "database.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2763,
+								2763
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "inc/class.BusRider.inc.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 54676,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3723,
+								3723
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1032.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "account_new.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5620,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5620,
+								5620
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 778.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "account_update.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6610,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1683,
+								1683
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 162.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "index.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								309,
+								309
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "process_message.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 508,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								138,
+								138
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "constants.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5701,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4212,
+								4212
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1710.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "inc/class.BusRider.inc.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 54676,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15304,
+								15304
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7954.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.424375,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "BusMinistry.sublime-workspace",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 242.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -7,7 +7,7 @@ $show_message = 'hidden';
 $show_form = 'not_hidden';
 $confirmation_message = "";
 $text_ride_msg = "Text -RIDE- at " 
-    . format_phone(substr(TWILIO_NUMBER,2,10))
+    . format_phone(substr(TWILIO_NUMBER)
     . " to make a reservation.";
 
 // Check to see if the form has been submitted
@@ -56,7 +56,7 @@ if ($_POST)
          . $text_ride_msg;
 
     $rider->log_message(SENDER,"Registration updated by user.");
-    $rider->send_sms_message(RECEIVER,$confirmation_message);   
+    $rider->send_sms_message(RECEIVER,str_replace("<br>", "\n", $confirmation_message));   
     
     $show_form = 'hidden';
     $show_message = 'not_hidden';

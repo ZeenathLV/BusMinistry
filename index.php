@@ -162,8 +162,7 @@ else
   {
     $rider = new BusRider(false);
     
-    $rider->load_rider($phone, $message);
-    
+    $rider->load_rider($phone, $message);   
     if($rider->has_error())
        throw new Exception($rider->get_error());
     
