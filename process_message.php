@@ -1,4 +1,12 @@
 <?php
+include_once("constants.php");
+$phone = "NOT_SET";
+if ($_REQUEST)
+{
+  $phone = $_REQUEST['From'];
+  $message = $_REQUEST['Body'];
+}
+
 try
 {
   $rider = new BusRider(true);

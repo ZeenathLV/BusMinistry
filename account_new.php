@@ -2,7 +2,7 @@
 include_once("constants.php");
 
 // Grab the phone from the text
-$phone_number = $_GET['phone_number'];
+$phone_number = $_GET['phone'];
 $show_message = 'hidden';
 $show_form = 'not_hidden';
 $formatted_phone = format_phone($phone_number);
