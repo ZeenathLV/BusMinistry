@@ -127,67 +127,18 @@ if ($_REQUEST)
   }
   </style>
   <script type="text/javascript">
-  function myFunction() 
+  function func_select_all() 
   {
-    var table_names = [
-      "bus_riders",
-      "bus_riders_reg",
-      "bus_riders_reg_insert",
-      "bus_rides",
-      "default_services",
-      "default_services_insert",
-      "services",
-      "sessions",
-      "session_choices",
-      "session_log",
-      "unregistered_log",
-      "session_choices_v",
-      "session_log_v",
-      "blocked_numbers" ];
-
     var chkbx_main = document.getElementById("select_all").checked;
-    for (var i = 0; i < table_names.length; i++ )
+
+    var checkbox_array = document.getElementsByClassName("chxbx");
+
+    for (var i = 0; i < checkbox_array.length; i++ )
     {
-     document.getElementById(table_names[i]).checked = chkbx_main;     
+      checkbox_array[i].checked = chkbx_main;     
     } 
 
     //alert("Is this thing working?");
-  }
-  function select_all()
-  {
-    var table_names = [
-      "bus_riders",
-      "bus_riders_reg",
-      "bus_riders_reg_insert",
-      "bus_rides",
-      "default_services",
-      "default_services_insert",
-      "services",
-      "sessions",
-      "session_choices",
-      "session_log",
-      "unregistered_log",
-      "session_choices_v",
-      "session_log_v",
-      "blocked_numbers" ];
-
-    alert("Is this thing working?");
-     
-    // var chkbx_main = document.getElementById("select_all").checked;
-
-    // if(chkbx_main)
-    // {
-    //   alert("the box is checked");
-    // }
-    // else
-    // {
-    //   alert("the box is not checked");
-    // }
-
-    //for (var i = 0; i < table_names.length; i++ )
-    //{
-    //  document.getElementById(table_names[i]).checked = chkbx_main;     
-    //} 
   }
   </script>
 </head>
@@ -203,7 +154,7 @@ if ($_REQUEST)
         <tr>
             <th align="LEFT">
               <label>
-                <input id='select_all' name='select_all' type='checkbox' onclick="myFunction()" />
+                <input id='select_all' name='select_all' type='checkbox' onclick="func_select_all()" />
                 &nbsp;&nbsp;Table Name
               </label>
             </th>
@@ -221,7 +172,9 @@ for($i = 0;$i < $max;$i++)
   $table_name = db_func_get_table_name($i);
   echo $baseline . "<tr>\n";
   echo $baseline . "  <td>\n";
-  echo $baseline . "    <label><input name='" . $table_name 
+  echo $baseline . "    <label><input "
+      . "class='chxbx'" 
+      . "  name='" . $table_name 
       . "' id='" . $table_name 
       . "' type='checkbox' >" 
       . db_func_get_table_long_name($i) 

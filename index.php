@@ -57,11 +57,11 @@ if ($_REQUEST)
 	}
   #content-box1 {
 		margin-left:232px;
-		width:150px;
+		width:175px;
 	}
   #content-box2 {
-		margin-left:415px;
-		width:275px;
+		margin-left:440px;
+		width:250px;
 	}
   #content-box3 {
 		margin-left:725px;
@@ -105,10 +105,14 @@ if ($_REQUEST)
       /* fallback */
   }
   tbody td, thead th {
-      width: 100%;
+      width: 97%;
       float: left;
   }
-  td { border-bottom: 1px solid #000; }
+  td 
+  { 
+    word-wrap: break-word;
+    border-bottom: 1px solid #000; 
+  }
   #message { padding: 3px; }
   </style>
   <script type="text/javascript">
