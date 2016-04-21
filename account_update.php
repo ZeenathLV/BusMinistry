@@ -120,8 +120,7 @@ else
   body {
 		font-family:arial,helvetica,sans-serif;
 		font-size:12px;
-    color: black;
-    <!-- color: white; -->
+    color: white;
 	}
 
     .hidden {
@@ -131,7 +130,7 @@ else
     {
       width: 225px;
       height: 550px;
-      <!-- background-image: url("images/bkgrnd.png"); -->
+      background-image: url("images/bkgrnd.png");
       padding-left: 20px;
    }
    #ministry-title

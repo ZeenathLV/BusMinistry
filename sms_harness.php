@@ -1,13 +1,21 @@
 <?php
 include_once("constants.php");
 
-$rider = new BusRider();
-echo "No Parameter: " . ($rider->get_twillio_flag() ? "TRUE" : "FALSE") . EEOL;
-$rider = new BusRider(false);
-echo "False Parameter: " . ($rider->get_twillio_flag() ? "TRUE" : "FALSE") . EEOL;
-$rider = new BusRider(true);
-echo "True Parameter: " . ($rider->get_twillio_flag() ? "TRUE" : "FALSE") . EEOL;
+$phone = "NOT_SET";
+if ($_REQUEST)
+{
+  $phone = $_REQUEST['From'];
+  $message = $_REQUEST['Body'];
+}
 
+$rider = new BusRider();
+
+$rider->load_rider($phone,$message);
+
+echo "phone_number: " . $rider->get_phone_number() . EEOL;
+echo "name_first: " . $rider->get_name_first() . EEOL;
+echo "sms_number: " . $rider->get_sms_number() . EEOL;
+echo "sms_message: " . $rider->get_sms_message() . EEOL;
 
 
 

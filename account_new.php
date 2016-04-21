@@ -8,7 +8,7 @@ $show_form = 'not_hidden';
 $formatted_phone = format_phone($phone_number);
 $confirmation_message = "";
 $text_ride_msg = "Text -RIDE- at " 
-    . format_phone(substr(TWILIO_NUMBER,2,10))
+    . format_phone(TWILIO_NUMBER)
     . " to make a reservation.";
 
 // Check to see if the form has been submitted
@@ -51,7 +51,7 @@ if ($_POST)
          . $text_ride_msg;
     
     $rider->log_message(SENDER,"Registration added by user.");
-    $rider->send_sms_message(RECEIVER,$confirmation_message);   
+    $rider->send_sms_message(RECEIVER,str_replace("<br>", "\n", $confirmation_message));   
 
     $show_form = 'hidden';
     $show_message = 'not_hidden';
@@ -97,8 +97,7 @@ else
   body {
 		font-family:arial,helvetica,sans-serif;
 		font-size:12px;
-    color: black;
-    <!-- color: white; -->
+    color: white;
 	}
 
     .hidden {
@@ -108,7 +107,7 @@ else
     {
       width: 225px;
       height: 550px;
-      <!-- background-image: url("images/bkgrnd.png"); -->
+      background-image: url("images/bkgrnd.png");
       padding-left: 20px;
    }
    #ministry-title
@@ -187,23 +186,23 @@ else
       <input type="text" name="formatted_phone" size="15" value="<?=$formatted_phone;?>" readonly /><br>
 
       <label for="name_first">First Name:</label><br>
-      <input type="text" size="25" name="name_first" id="name_first" /><br>
+      <input type="text" size="35" name="name_first" id="name_first" /><br>
 
       <label for="name_last">Last Name:</label><br>
-      <input type="text" size="25" name="name_last" id="name_last" /><br>
+      <input type="text" size="35" name="name_last" id="name_last" /><br>
 
       <label for="address1">Street Address:</label><br>
-      <input type="text" size="25" name="address1" id="address1" /><br>
-      <input type="text" size="25" name="address2" id="address2" /><br>
+      <input type="text" size="35" name="address1" id="address1" /><br>
+      <input type="text" size="35" name="address2" id="address2" /><br>
 
       <label for="city">City:</label><br>
-      <input type="text" size="25" name="city" id="city" /><br>
+      <input type="text" size="35" name="city" id="city" /><br>
 
       <label for="zip_code">Zip Code:</label><br>
-      <input type="text" size="25" name="zip_code" id="zip_code" /><br>
+      <input type="text" size="35" name="zip_code" id="zip_code" /><br>
 
       <label for="special_handling">Special Handling<br>(Gate code,special directions, etc.):</label><br>
-      <input type="text" size="25" name="special_handling" id="special_handling" /><br><br>
+      <input type="text" size="35" name="special_handling" id="special_handling" /><br><br>
 
       <input type="submit" name="btn-submit" value="Save"/>
     </form>
