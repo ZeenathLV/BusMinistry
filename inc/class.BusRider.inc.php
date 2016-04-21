@@ -1274,7 +1274,7 @@ class BusRider
     $msg = "Welcome to The Rock Bus Ministry\n"
       . "It appears you have not registered with us. "
       . "Click on this link: " . ROOT_PATH 
-      . "account_new.php?phone_number=" . $this->get_sms_number()
+      . "account_new.php?phone=" . $this->get_sms_number()
       . "\n\nWhen you have completed the registration, "
       . "text -RIDE- and you will be able to select "
       . "a ride for upcoming Rock Church services.";
@@ -1514,7 +1514,7 @@ class BusRider
   
   public function send_sms_msg($message)
   {
-    if($this->_twilio_enabled)
+    if($this->get_twillio_flag())
     {
       try 
       {
