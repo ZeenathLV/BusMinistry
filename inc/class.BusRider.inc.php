@@ -75,7 +75,13 @@ class BusRider
   
   public function set_error($error) { $this->_error = $error; }
   
-  public function set_sms_number($sms_number) { $this->_sms_number = $sms_number; }
+  public function set_sms_number($sms_number) 
+  { 
+    if(startsWith($sms_number,"+1"))
+      $this->_sms_number = substr($sms_number,2,10);
+    else
+      $this->_sms_number = $sms_number;
+  }
   public function set_sms_message($sms_message) 
   { 
     $this->_sms_message =  strtoupper(trim(hack_check($sms_message)));
@@ -559,7 +565,7 @@ class BusRider
       
       // Set the values for an unregistered rider
       $this->set_rider_id(NEW_ID);
-      $this->set_phone_number($sms_number);
+      $this->set_phone_number($this->get_sms_number());
       $this->set_name_last("Number not found");
 
       $this->set_ses_id(NEW_ID);
@@ -1835,5 +1841,7 @@ class BusRider
       $this->log_error();
     }
   }
+
 }
+
 ?>
